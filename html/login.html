@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../utils/layui/css/layui.css" />
+
+    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <style>
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        /*移除表单填充色*/
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px #ececec inset;
+        }
+
+        /*按钮移上去颜色*/
+        .layui-btn-primary:hover {
+            border-color: #1E9FFF;
+            color: #333;
+        }
+
+        /*页面背景色*/
+        .m-login-bg {
+            background: #fafafa;
+            height: 100%;
+        }
+
+        .m-login {
+            width: 390px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -195px;
+            margin-top: -205px;
+        }
+
+        .m-login h3 {
+            color: #1E9FFF;
+            text-align: center;
+            height: 60px;
+            font-size: 28px;
+        }
+
+
+
+        .m-login-warp {
+            background: #fff;
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            padding: 25px;
+        }
+
+        .m-login-warp .layui-input {
+            height: 40px;
+            line-height: 40px\9;
+            margin-bottom: 5px;
+            -webkit-transition-property: none;
+            transition-property: none;
+            background: #ececec;
+            border: 1px solid #ececec;
+        }
+
+        .m-login-warp .m-login-btn .layui-inline {
+            width: 49%;
+            margin: 0;
+        }
+
+        .m-login-warp .m-login-btn .layui-inline button {
+            width: 100%;
+        }
+
+        .layui-form-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .layui-form-item .layui-inline {
+            margin: 0;
+        }
+
+        .m-login-warp .verifyImg {
+            width: 178px;
+            height: 40px;
+        }
+
+        @media screen and (max-width: 450px) {
+            .m-login {
+                width: 300px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -150px;
+                margin-top: -240px;
+            }
+
+            .layui-form-item .layui-inline {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 20px;
+                clear: both;
+            }
+
+            .m-login-warp .m-login-btn .layui-inline {
+                width: 100%;
+                margin: 0 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="m-login-bg">
+        <div class="m-login">
+            <h3>后台系统登录</h3>
+            <div class="m-login-warp">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <input type="text" name="title" required="" lay-verify="required" placeholder="用户名"
+                            autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <input type="text" name="password" required="" lay-verify="required" placeholder="密码"
+                            autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <input type="text" name="verity" required="" lay-verify="required" placeholder="验证码"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-inline">
+                            <img class="verifyImg" onclick="this.src=this.src+'?guid='+Math.random();"
+                                src="https://testadmin.uhouzz.com/index.php/admin/public/verifycode">
+                        </div>
+                    </div>
+                    <div class="layui-form-item m-login-btn">
+                        <div class="layui-inline">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="login">登录</button>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../utils/layui/layui.all.js"></script>
+<script>
+
+    layui.use('form', function () {
+        var form = layui.form,
+            layer = layui.layer;
+
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            },
+            password: [/(.+){6,12}$/, '密码必须6到12位'],
+            verity: [/(.+){6}$/, '验证码必须是6位'],
+
+        });
+
+
+        //监听提交
+        form.on('submit(login)', function (data) {
+
+
+            layer.open({
+                content:JSON.stringify(data.field)
+                , btn: ['确定', '取消']
+                , yes: function (index, layero) {
+                    console.log(index)
+                    window.location.replace('file:///Users/zhengzhiyong/Documents/uhouzz/layui-admin/layouts/index.html')
+                    //按钮【按钮一】的回调
+                }
+                , btn2: function (index, layero) {
+                    //按钮【按钮二】的回调
+                    console.log(index)
+                    layer.close(index);
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+                , cancel: function () {
+                    //右上角关闭回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+            });
+        
+            return false;
+        });
+
+    });
+
+</script>
+
+</html>

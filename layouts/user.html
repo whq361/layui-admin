@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>uhouzz后台管理模版</title>
+    <link rel="stylesheet" type="text/css" href="../utils/layui/css/layui.css" />
+
+    <link rel="stylesheet" type="text/css" href="../css/global.css" />
+    <style>
+    
+    .iframe{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    </style>
+</head>
+
+<body>
+
+    <iframe src="../html/login.html" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe"
+        framborder="0"></iframe> -->
+
+
+
+
+    <script src="../utils/layui/layui.all.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+<script>
+
+layui.config({
+  base: '../utils/layui/modules/'      //自定义layui组件的目录
+}).extend({ //设定组件别名
+  common:   'common',
+});
+
+
+</script>
+</html>

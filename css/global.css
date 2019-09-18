@@ -1802,3 +1802,6 @@ html {
 .layui-table-view{
   margin: 0 15px;
 }
+.search .layui-input-block {
+  margin-left:0;  
+}

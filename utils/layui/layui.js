@@ -27,7 +27,6 @@
       layer: "modules/layer",
       laydate: "modules/laydate",
       laypage: "modules/laypage",
-      dialog:"modules/dialog.js",
       laytpl: "modules/laytpl",
       layim: "modules/layim",
       layedit: "modules/layedit",

@@ -1,9 +1,16 @@
-layui.use(["layer", "form", "element", "jquery", "dialog"], function() {
+
+
+
+layui.config({
+  base: '../utils/layui/modules/'      //自定义layui组件的目录
+}).extend({ //设定组件别名
+  common:   'common',
+}).use(["layer", "form", "element", "jquery",'common'], function() {
+  console.log(layui.common)
   var layer = layui.layer;
   var element = layui.element;
   var form = layui.form;
   var $ = layui.jquery;
-  var dialog = layui.dialog;
   var hideBtn = $("#hideBtn");
   var mainLayout = $("#main-layout");
   //监听导航点击
